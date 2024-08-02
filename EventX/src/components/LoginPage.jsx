@@ -1,6 +1,12 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 function LoginPage() {
+
+  const loginWithGoogle =()=>{
+      window.open('http://localhost:3000/auth/google/callback','_self')
+  }
   return (
     <div className="bg-white h-screen w-screen flex flex-col md:flex-row">
       <div className="bg-[#F8F8FA] w-full md:w-3/5 h-full md:h-screen flex items-center justify-center">
@@ -21,10 +27,14 @@ function LoginPage() {
                 </div>
                 <input className="bg-white p-2 mt-2 md:mt-5 border rounded" type="password" placeholder="Enter your password" />
               </div>
+              <p className='float-end pt-2 p-2 text-[#7E7E7E] opacity-65 text-xs sm:text-sm md:text-base'>
+  Not registered? <Link to='/signup' className='text-[#0062E0]'>Create an account</Link>
+</p>
+
               <input className="bg-[#1EA1F2] items-center w-full md:w-32 text-white p-2 border rounded-md text-center mt-6 md:mt-10 mx-auto block cursor-pointer" type="submit" value="Log In" />
             </form>
             <p className="inter text-center text-[#7E7E7E] opacity-65 pt-4 md:pt-6">Or</p>
-            <button className="bg-white mx-auto block border p-2 pl-8 pr-8 md:pl-20 md:pr-20 rounded mt-3 md:mt-5">
+            <button className="bg-white mx-auto block border p-2 pl-8 pr-8 md:pl-20 md:pr-20 rounded mt-3 md:mt-5" onClick={loginWithGoogle}>
               <div className="flex gap-2 inter font-[400] items-center justify-center">
                 <img src="/Logogoogle.png" alt="Google logo" className="w-5 h-5" />
                 Sign up with Google
