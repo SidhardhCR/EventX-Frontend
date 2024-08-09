@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Dropdown from './Dropdown'
 import Card from './Card';
+import { Link } from 'react-router-dom';
 
 
 
@@ -102,9 +103,9 @@ function Home() {
         Event<span className="text-[#0062E0]">X</span>
       </h1>
       <div>
-        <button className='bg-[#1EA1F2] inter my-4 md:m-6 w-full md:w-72 mr-4 md:mr-16 text-white p-4 border rounded-md text-center cursor-pointer'>
+        <Link to='/create_events'><button className='bg-[#1EA1F2] inter my-4 md:m-6 w-full md:w-72 mr-4 md:mr-16 text-white p-4 border rounded-md text-center cursor-pointer'>
           Create Events
-        </button>
+        </button></Link>
       </div>
     </div>
 
@@ -136,7 +137,7 @@ function Home() {
     <h1 className="text-xl md:text-4xl font-bold m-4 md:m-10">
       Upcoming <span className="text-[#0062E0]">Events</span>
     </h1>
-    <div className='flex flex-wrap justify-center gap-x-6 gap-y-8'>
+    <div className='flex flex-wrap md:ml-10 gap-x-10 gap-y-8'>
       {
         data.slice(0, visibleCount).map((data, index) => (
           <Card 
