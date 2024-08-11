@@ -16,69 +16,18 @@ function Home() {
     setVisibleCount((prevCount) => prevCount + 6); // Increase the count by 6
   };
 
-  const data =[
-    {
-      event_title:'Sample',
-      event_venue:'kochi',
-      event_date:'Sunday, March 24',
-      event_time:'9:45pm'
-    },
-    {
-      event_title:'BestSelller Book Bootcamp -write, Market & Publish Your Book -Lucknow',
-      event_venue:'ONLINE EVENT - Attend anywhere',
-      event_date:'Saturdat, March 18',
-      event_time:'9:30pm'
-    },
-    {
-      event_title:'Sample',
-      event_venue:'kochi',
-      event_date:'Sunday, March 24',
-      event_time:'9:45pm'
-    },
-    {
-      event_title:'BestSelller Book Bootcamp -write, Market & Publish Your Book -Lucknow',
-      event_venue:'ONLINE EVENT - Attend anywhere',
-      event_date:'Saturdat, March 18',
-      event_time:'9:30pm'
-    },
-    {
-      event_title:'Sample',
-      event_venue:'kochi',
-      event_date:'Sunday, March 24',
-      event_time:'9:45pm'
-    },
-    {
-      event_title:'BestSelller Book Bootcamp -write, Market & Publish Your Book -Lucknow',
-      event_venue:'ONLINE EVENT - Attend anywhere',
-      event_date:'Saturdat, March 18',
-      event_time:'9:30pm'
-    },
-    {
-      event_title:'Sample',
-      event_venue:'kochi',
-      event_date:'Sunday, March 24',
-      event_time:'9:45pm'
-    },
-    {
-      event_title:'BestSelller Book Bootcamp -write, Market & Publish Your Book -Lucknow',
-      event_venue:'ONLINE EVENT - Attend anywhere',
-      event_date:'Saturdat, March 18',
-      event_time:'9:30pm'
-    },
-    {
-      event_title:'Sample',
-      event_venue:'kochi',
-      event_date:'Sunday, March 24',
-      event_time:'9:45pm'
-    },
-    {
-      event_title:'BestSelller Book Bootcamp -write, Market & Publish Your Book -Lucknow',
-      event_venue:'ONLINE EVENT - Attend anywhere',
-      event_date:'Saturdat, March 18',
-      event_time:'9:30pm'
-    },
 
-  ]
+
+  const [events,setEvents] = useState([])
+  const getEvents = async()=>{
+    try{
+      const response = await axios.get('http://localhost:3000/api/events')
+      console.log(response)
+      setEvents(response.data.events)
+    } catch(err){
+      console.log(err)
+    }
+  }
 
     const [userdata,setUserdata] = useState({})
     const getUser =async()=>{
@@ -93,6 +42,7 @@ function Home() {
 
     useEffect(()=>{
         getUser();
+        getEvents();
     },[])
   return (
     <>
@@ -139,19 +89,20 @@ function Home() {
     </h1>
     <div className='flex flex-wrap md:ml-10 gap-x-10 gap-y-8'>
       {
-        data.slice(0, visibleCount).map((data, index) => (
+        events.slice(0, visibleCount).map((data, index) => (
           <Card 
             key={index} 
             title={data.event_title} 
             venue={data.event_venue} 
-            date={data.event_date} 
-            time={data.event_time} 
+            date={data.start_date} 
+            time={data.start_time} 
+            imageUrl={'http://localhost:3000/api/images/'+data._id+'.jpg'}
           />
         ))
       }
     </div>
 
-    {visibleCount < data.length && (
+    {visibleCount < events.length && (
       <div className='flex justify-center mt-8'>
         <button
           onClick={loadMore}
