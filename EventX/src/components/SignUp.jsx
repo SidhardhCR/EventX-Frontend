@@ -7,6 +7,9 @@ import axios from 'axios'
 
 function SignUp() {
   const navigate = useNavigate();
+  const loginWithGoogle =()=>{
+    window.open('http://localhost:3000/auth/google/callback','_self')
+}
 
   const [data, setData]= useState({
     name:'',
@@ -61,12 +64,12 @@ Already have an acoount? <Link to='/login' className='text-[#0062E0]'>Log In</Li
             <input className="bg-[#1EA1F2] items-center w-full md:w-32 text-white p-2 border rounded-md text-center mt-6 md:mt-10 mx-auto block cursor-pointer" type="submit" value=" Sign Up" />
           </form>
         
-          {/* <button className="bg-white mx-auto block border p-2 pl-8 pr-8 md:pl-20 md:pr-20 rounded mt-3 md:mt-5" onClick={loginWithGoogle}>
+          <button className="bg-white mx-auto block border p-2 pl-8 pr-8 md:pl-20 md:pr-20 rounded mt-3 md:mt-5" onClick={loginWithGoogle}>
             <div className="flex gap-2 inter font-[400] items-center justify-center">
               <img src="/Logogoogle.png" alt="Google logo" className="w-5 h-5" />
               Sign up with Google
             </div>
-          </button> */}
+          </button>
         </div>
       </div>
     </div>

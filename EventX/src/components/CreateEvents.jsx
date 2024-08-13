@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Link , useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function CreateEvents() {
-    const navigate = useNavigate();
+  const [userdata, setUserdata] = useState(null); // Initialize userdata as null
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [formData, setFormData] = useState({
     event_name: '',
@@ -14,6 +15,16 @@ function CreateEvents() {
     end_date: '',
     event_descp: ''
   });
+
+  const getUser = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/login/success', { withCredentials: true });
+      console.log('response', response);
+      setUserdata(response.data.user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -42,6 +53,9 @@ function CreateEvents() {
   };
 
   const handleSubmit = async (e) => {
+    if (!userdata){
+      navigate('/login')
+    }else{
     e.preventDefault();
     const data = new FormData();
     data.append('event_title', formData.event_name);
@@ -60,13 +74,18 @@ function CreateEvents() {
         },
       });
       console.log(response.data);
-      if (response.data.message == 'success'){
-            navigate('/')
+      if (response.data.message === 'success') {
+        navigate('/');
       }
     } catch (error) {
       console.error('Error uploading file:', error);
     }
+  }
   };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <div className='bg-[#F8F8FA] m-2'>
@@ -75,12 +94,22 @@ function CreateEvents() {
           Event<span className="text-[#0062E0]">X</span>
         </h1>
         <div>
-          <Link to='/create_events'><button className='bg-[#F8F8FA] inter my-2 md:m-6 w-20 md:w-36 mr-4 md:mr-10 text-black p-4 text-center cursor-pointer'>
-            Login
-          </button></Link>
-          <Link to='/create_events'><button className='bg-[#1EA1F2] inter my-2 md:m-6 w-20 md:w-36 mr-4 md:mr-16 text-white p-4 border rounded-md text-center cursor-pointer'>
-            SignUp
-          </button></Link>
+          {
+            userdata ? null : (
+              <>
+                <Link to='/login'>
+                  <button className='bg-[#F8F8FA] inter my-2 md:m-6 w-20 md:w-36 mr-4 md:mr-10 text-black p-4 text-center cursor-pointer'>
+                    Login
+                  </button>
+                </Link>
+                <Link to='/signup'>
+                  <button className='bg-[#1EA1F2] inter my-2 md:m-6 w-20 md:w-36 mr-4 md:mr-16 text-white p-4 border rounded-md text-center cursor-pointer'>
+                    SignUp
+                  </button>
+                </Link>
+              </>
+            )
+          }
         </div>
       </div>
 
