@@ -53,9 +53,8 @@ function CreateEvents() {
   };
 
   const handleSubmit = async (e) => {
-    if (!userdata){
-      navigate('/login')
-    }else{
+   
+      
     e.preventDefault();
     const data = new FormData();
     data.append('event_title', formData.event_name);
@@ -80,7 +79,7 @@ function CreateEvents() {
     } catch (error) {
       console.error('Error uploading file:', error);
     }
-  }
+  
   };
 
   useEffect(() => {
