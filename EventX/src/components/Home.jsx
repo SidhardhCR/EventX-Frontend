@@ -130,7 +130,7 @@ function Home() {
                   venue={data.event_venue} 
                   date={data.start_date} 
                   time={data.start_time} 
-                  imageUrl={'http://localhost:3000/api/images/' + data._id + '.jpg'} 
+                  imageUrl={'https://event-x-backend.vercel.app/api/images/' + data._id + '.jpg'} 
                 />
               ))
             }
