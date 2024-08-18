@@ -8,7 +8,7 @@ import axios from 'axios'
 function SignUp() {
   const navigate = useNavigate();
   const loginWithGoogle =()=>{
-    window.open('http://localhost:3000/auth/google/callback','_self')
+    window.open('https://event-x-backend.vercel.app/auth/google/callback','_self')
 }
 
   const [data, setData]= useState({
@@ -23,7 +23,7 @@ function SignUp() {
 
   function handleSubmit(event){
       event.preventDefault()
-      axios.post('http://localhost:3000/users/signup',{data}).then((response)=>{
+      axios.post('https://event-x-backend.vercel.app/users/signup',{data}).then((response)=>{
           console.log(response)
           if (response.data.message) {
             navigate('/');

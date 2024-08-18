@@ -23,7 +23,7 @@ function Home() {
 
   const getEvents = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/events');
+      const response = await axios.get('https://event-x-backend.vercel.app/api/events');
       setEvents(response.data.events);
       setFilteredEvents(response.data.events);
     } catch (err) {
@@ -33,7 +33,7 @@ function Home() {
 
   const getUser = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/login/success', { withCredentials: true });
+      const response = await axios.get('https://event-x-backend.vercel.app/login/success', { withCredentials: true });
       setUserdata(response.data.user);
     } catch (err) {
       console.log(err);

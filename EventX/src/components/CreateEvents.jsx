@@ -18,7 +18,7 @@ function CreateEvents() {
 
   const getUser = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/login/success', { withCredentials: true });
+      const response = await axios.get('https://event-x-backend.vercel.app/login/success', { withCredentials: true });
       console.log('response', response);
       setUserdata(response.data.user);
     } catch (err) {
@@ -68,7 +68,7 @@ function CreateEvents() {
     data.append('event_descp', formData.event_descp);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/event_submit', data, {
+      const response = await axios.post('https://event-x-backend.vercel.app/api/event_submit', data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

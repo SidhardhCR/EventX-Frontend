@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function LoginPage() {
 
   const loginWithGoogle =()=>{
-      window.open('http://localhost:3000/auth/google/callback','_self')
+      window.open('https://event-x-backend.vercel.app/auth/google/callback','_self')
   }
   return (
     <div className="bg-white h-screen w-screen flex flex-col md:flex-row">
